@@ -4,16 +4,20 @@ import { updateQuote } from "../slices/quote-slice";
 const quoteAPI = createApi({
   reducerPath: "quoteAPI",
   baseQuery: fetchBaseQuery({
-    baseUrl: "",
+    baseUrl: "https://api.quotable.io",
   }),
   endpoints: builder => ({
     getQuote: builder.query({
-      query: () => "",
+      query: () => ({
+        url: "/quotes/random",
+      }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
 
-          dispatch(updateQuote(data));
+          const { author, content: quote } = data[0];
+
+          dispatch(updateQuote({ quote, author }));
         } catch (error) {
           console.log("Couldn't get random quote...", { error });
         }

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   quote: null,
+  author: null,
   loading: true,
 };
 
@@ -10,7 +11,9 @@ const quoteSlice = createSlice({
   initialState,
   reducers: {
     updateQuote: (state, action) => {
-      state.quote = action.payload;
+      state.quote = action.payload.quote;
+      state.author = action.payload.author;
+      state.loading = false;
     },
   },
   extraReducers: builder => {},
