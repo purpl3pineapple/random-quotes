@@ -13,6 +13,7 @@ const NewQuoteButton = () => {
     <NavLink
       as='button'
       className='new-quote-nav text-dark'
+      id='new-quote'
       onClick={getNewQuote}
     >
       New Quote
